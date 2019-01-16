@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Resume class="container"/>
+      <Resume/>
   </div>
 </template>
 
@@ -21,10 +21,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: black;
-}
-
-.container {
-  width: 8.5in;
-  height: 11in;
 }
 </style>

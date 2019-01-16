@@ -1,140 +1,146 @@
 <template>
-  <div class="resume">
-    <div class="header">
-      <h1>Tommy Deng</h1>
-    </div>
-    <div class="row">
-      <div class="column left">
-        <!-- EDUCATION -->
-        <section>
-          <h2>Education</h2>
-          <h3>{{ education.school }}</h3>
-          <h4>{{ education.degree }}</h4>
-          <h5>
-            {{ education.progress }} - Expected {{ education.expected }}
-            <br>
-            CGPA: {{ education.cgpa }}
-          </h5>
-        </section>
+  <div id="resume" style="transform: scale(1);">
+    <div class="container">
+      <div class="header">
+        <h1>
+          <a href="http://tommydeng.com/">Tommy Deng</a>
+        </h1>
+      </div>
+      <div class="row">
+        <div class="column left">
+          <!-- EDUCATION -->
+          <section id="education">
+            <h2>Education</h2>
+            <h3>{{ education.school }}</h3>
+            <h4>{{ education.degree }}</h4>
+            <h5>
+              {{ education.progress }} - Expected {{ education.expected }}
+              <br>
+              CGPA: {{ education.cgpa }}
+            </h5>
+          </section>
 
-        <!-- CONTACT -->
-        <section>
-          <h2>Contact</h2>
-          <ul>
-            <li v-for="item in contacts" :key="item">
-              <a :href="item.href">{{ item.display }}</a>
-            </li>
-          </ul>
-        </section>
+          <!-- CONTACT -->
+          <section id="contact">
+            <h2>Contact</h2>
+            <ul>
+              <li v-for="item in contacts" :key="item">
+                <a :href="item.href">{{ item.display }}</a>
+              </li>
+            </ul>
+          </section>
 
-        <!-- LINKS -->
-        <section>
-          <h2>Links</h2>
-          <ul>
-            <li v-for="item in links" :key="item">
-              <a :href="item.href">{{ item.display }}</a>
-            </li>
-          </ul>
-        </section>
+          <!-- LINKS -->
+          <section id="links">
+            <h2>Links</h2>
+            <ul>
+              <li v-for="item in links" :key="item">
+                <a :href="item.href">{{ item.display }}</a>
+              </li>
+            </ul>
+          </section>
 
-        <!-- SKILLS -->
-        <section>
-          <h2>Skills</h2>
-          <div v-for="(skill, index) in skills" :key="skill">
-            <h5 style="text-transform: capitalize;">{{ index }}</h5>
-            <p v-for="item in skill" :key="item">
-              <span v-for="(language, index) in item" :key="index">
+          <!-- SKILLS -->
+          <section id="skills">
+            <h2>Skills</h2>
+            <div v-for="(skill, index) in skills" :key="skill">
+              <h5 style="text-transform: capitalize;">{{ index }}</h5>
+              <p v-for="item in skill" :key="item">
+                <span v-for="(language, index) in item" :key="index">
+                  <span v-if="index != 0">&bull;</span>
+                  {{ language }}
+                </span>
+              </p>
+            </div>
+          </section>
+
+          <!-- HACKATHONS -->
+          <section id="hackathons">
+            <h2>Hackathons</h2>
+            <ul>
+              <li v-for="item in hackathons" :key="item">
+                {{ item.date }}
+                <span>{{ item.name }}</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- AWARDS -->
+          <section id="awards">
+            <h2>Awards</h2>
+            <ul>
+              <li v-for="item in awards" :key="item">
+                {{ item.date }}
+                <span>{{ item.name }}</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- INTERESTS -->
+          <section id="interests">
+            <h2>Interests</h2>
+            <p v-for="item in interests" :key="item">
+              <span v-for="(interest, index) in item" :key="index">
                 <span v-if="index != 0">&bull;</span>
-                {{ language }}
+                {{ interest }}
               </span>
             </p>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <!-- HACKATHONS -->
-        <section>
-          <h2>Hackathons</h2>
-          <ul>
-            <li v-for="item in hackathons" :key="item">
-              {{ item.date }}
-              <span>{{ item.name }}</span>
-            </li>
-          </ul>
-        </section>
+        <div class="column right">
+          <!-- WORK EXPERIENCE -->
+          <section id="work">
+            <h2>Work Experience</h2>
+            <div v-for="item in work_experience" :key="item">
+              <h3>
+                {{ item.name }}
+                <h4 style="display: inline;">&nbsp;| {{ item.position }}</h4>
+              </h3>
+              <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
+              <ul>
+                <li v-for="point in item.details" :key="point">{{ point }}</li>
+              </ul>
+            </div>
+          </section>
 
-        <!-- AWARDS -->
-        <section>
-          <h2>Awards</h2>
-          <ul>
-            <li v-for="item in awards" :key="item">
-              {{ item.date }}
-              <span>{{ item.name }}</span>
-            </li>
-          </ul>
-        </section>
+          <!-- ADDITIONAL EXPERIENCE -->
+          <section id="additional">
+            <h2>Additional Experience</h2>
+            <div v-for="item in other_experience" :key="item">
+              <h3>
+                {{ item.name }}
+                <h4 style="display: inline;">&nbsp;| {{ item.position }}</h4>
+              </h3>
+              <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
+              <ul>
+                <li v-for="point in item.details" :key="point">{{ point }}</li>
+              </ul>
+            </div>
+          </section>
 
-        <!-- INTERESTS -->
-        <section>
-          <h2>Interests</h2>
-          <p v-for="item in interests" :key="item">
-            <span v-for="(interest, index) in item" :key="index">
-              <span v-if="index != 0">&bull;</span>
-              {{ interest }}
-            </span>
-          </p>
-        </section>
+          <!-- PROJECTS -->
+          <section id="projects">
+            <h2>Projects</h2>
+            <div v-for="item in projects" :key="item">
+              <h3>
+                {{ item.name }}
+                <h5 style="display: inline;">&nbsp;{{ item.tag }} | {{ item.date }}</h5>
+              </h3>
+              <ul>
+                <li v-for="point in item.details" :key="point">{{ point }}</li>
+              </ul>
+            </div>
+          </section>
+        </div>
       </div>
 
-      <div class="column right">
-        <!-- WORK EXPERIENCE -->
-        <section>
-          <h2>Work Experience</h2>
-          <div v-for="item in work_experience" :key="item">
-            <h3>
-              {{ item.name }} |
-              <h4 style="display: inline;">{{ item.position }}</h4>
-            </h3>
-            <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
-            <ul>
-              <li v-for="point in item.details" :key="point">{{ point }}</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- TECHNICAL AND LEADERSHIP EXPERIENCE -->
-        <section>
-          <h2>Technical and Leadership Experience</h2>
-          <div v-for="item in other_experience" :key="item">
-            <h3>
-              {{ item.name }} |
-              <h4 style="display: inline;">{{ item.position }}</h4>
-            </h3>
-            <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
-            <ul>
-              <li v-for="point in item.details" :key="point">{{ point }}</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- PROJECTS -->
-        <section>
-          <h2>Projects</h2>
-          <div v-for="item in projects" :key="item">
-            <h3>
-              {{ item.name }}
-              <h5 style="display: inline;">{{ item.tag }} | {{ item.date }}</h5>
-            </h3>
-            <ul>
-              <li v-for="point in item.details" :key="point">{{ point }}</li>
-            </ul>
-          </div>
-        </section>
+      <div class="footer">
+        <p>
+          Please see
+          <a href="http://tommydeng.com/">tommydeng.com</a> for projects
+        </p>
       </div>
-    </div>
-
-    <div class="footer">
-      Please see
-      <a href>tommydeng.com</a> for projects
     </div>
   </div>
 </template>
@@ -245,7 +251,7 @@ export default {
           end: "Present",
           location: "Ottawa, ON",
           details: [
-            "Managed and updated the company website, meetinventure.com",
+            "Designed and updated the company website, meetinventure.com",
             "Improved user experience by continuously communicating with clients",
             "Organized the four-hour SparkFest 2018 event with the Inventure team",
             "Created SparkFest sponsor video featuring Google and Invest Ottawa"
@@ -324,9 +330,19 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Lato:200,300,400,700|Raleway:600");
+
 * {
   padding: 0;
   margin: 0;
+}
+
+.container {
+  width: 8.5in;
+  height: 11in;
+  margin: 0 auto;
+  padding: 0.3in 0.5in;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 32px 0 rgba(0, 0, 0, 0.08);
 }
 
 .row {
@@ -352,5 +368,101 @@ export default {
 
 .footer {
   text-align: center;
+}
+
+h1 {
+  font-family: "Lato";
+  font-weight: 200;
+  font-size: 28pt;
+  text-transform: uppercase;
+  color: dimgray;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: "Lato";
+  font-weight: 200;
+  font-size: 16pt;
+  text-transform: uppercase;
+  color: dimgray;
+}
+
+h3 {
+  font-family: "Lato";
+  font-weight: 700;
+  font-size: 13pt;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-family: "Raleway";
+  font-size: 13pt;
+  font-weight: 600;
+}
+
+.right h4 {
+  text-transform: initial;
+  font-variant: small-caps;
+}
+
+h5 {
+  font-family: "Raleway";
+  font-size: 11pt;
+  color: dimgray;
+  text-transform: initial;
+}
+
+p {
+  font-family: "Lato";
+  font-weight: 300;
+}
+
+li {
+  font-family: "Lato";
+  font-weight: 300;
+  list-style-type: none;
+  position: relative;
+}
+
+p,
+li {
+  font-size: 11pt;
+}
+
+.right li {
+  margin-left: 24px;
+}
+
+.right li::before {
+  content: "\2022";
+  position: absolute;
+  left: -0.8em;
+  font-size: 1.1em;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  color: black;
+  font-weight: 400;
+}
+
+.header a {
+  font-weight: inherit;
+  color: inherit;
+}
+
+section {
+  margin-bottom: 12px;
+}
+
+#skills div,
+#work div,
+#additional div {
+  margin-bottom: 8px;
+}
+
+#projects div {
+  margin-bottom: 4px;
 }
 </style>
