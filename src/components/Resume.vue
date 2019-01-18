@@ -1,9 +1,9 @@
 <template>
-  <div id="resume" style="transform: scale(1);">
+  <div id="resume">
     <div class="container">
       <div class="header">
         <h1>
-          <a href="http://tommydeng.com/">Tommy Deng</a>
+          <a href="http://tommydeng.com/">{{ firstName }} {{ lastName }}</a>
         </h1>
       </div>
       <div class="row">
@@ -107,14 +107,14 @@
           <!-- ADDITIONAL EXPERIENCE -->
           <section id="additional">
             <h2>Additional Experience</h2>
-            <div v-for="item in other_experience" :key="item">
+            <div v-for="item in additional_experience" :key="item">
               <h3>
                 {{ item.name }}
                 <h4 style="display: inline;">&nbsp;| {{ item.position }}</h4>
               </h3>
               <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
               <ul>
-                <li v-for="point in item.details" :key="point">{{ point }}</li>
+                <li id="rawhtml" v-for="point in item.details" :key="point" v-html="point"></li>
               </ul>
             </div>
           </section>
@@ -136,10 +136,10 @@
       </div>
 
       <div class="footer">
-        <p>
+        <li>
           Please see
           <a href="http://tommydeng.com/">tommydeng.com</a> for projects
-        </p>
+        </li>
       </div>
     </div>
   </div>
@@ -151,6 +151,8 @@ export default {
   props: {},
   data() {
     return {
+      firstName: "Tommy",
+      lastName: "Deng",
       education: {
         school: "University of Ottawa",
         degree: "BASc Software Engineering",
@@ -159,6 +161,10 @@ export default {
         cgpa: "9.2/10 (Dean's Honour List)"
       },
       contacts: [
+        {
+          href: "mailto:contact@tommydeng.com",
+          display: "contact@tommydeng.com"
+        },
         { href: "mailto:tdeng075@uottawa.ca", display: "tdeng075@uottawa.ca" }
       ],
       links: [
@@ -176,7 +182,8 @@ export default {
         ],
         libraries: [
           ["OpenCV", "Numpy", "Selenium"],
-          ["Keras", "PyAutoGUI", "Pillow"]
+          ["Keras", "PyAutoGUI", "Pillow"],
+          ["Robot Framework"]
         ],
         technologies: [
           ["Vue", "React", "NodeJS", "Django"],
@@ -193,6 +200,7 @@ export default {
         ]
       },
       hackathons: [
+        { name: "UOttaHack", date: "2019" },
         { name: "ConUHacks", date: "2019" },
         { name: "Hack Western", date: "2018" },
         { name: "Hack the North", date: "2018" },
@@ -215,7 +223,7 @@ export default {
           start: "Jan 2019",
           end: "Apr 2019",
           location: "Ottawa, ON",
-          details: []
+          details: ["_", "_", "_"]
         },
         {
           name: "Global Affairs Canada",
@@ -226,11 +234,23 @@ export default {
           details: [
             "Read and followed system design diagrams for the EICS II project",
             "Became proficient in Microsoft Test Manager and Team Foundation Server for executing quality control tests",
-            "Trained new consultants on toolset usage, testing workflow, and system requirements"
+            "Trained consultants on toolset usage, testing workflow, and system requirements"
           ]
         }
       ],
-      other_experience: [
+      additional_experience: [
+        {
+          name: "Inventure Accelerator",
+          position: "Front-end Developer",
+          start: "Jan 2018",
+          end: "Present",
+          location: "Ottawa, ON",
+          details: [
+            `Designed and deployed company website (<a href="https://meetinventure.com/">meetinventure.com</a>) using Vue.js`,
+            "Organized the four-hour SparkFest 2018 event with the Inventure team",
+            "Created SparkFest sponsor video featuring Google and Invest Ottawa"
+          ]
+        },
         {
           name: "Ottabotics Robot Racing",
           position: "Robotics Competition Team",
@@ -239,22 +259,8 @@ export default {
           location: "Ottawa, ON",
           details: [
             "Automated Blender with Python to render photorealistic videos of racing tracks for use as training data and driving simulation for autonomous vehicle",
-            "Created computer vision system to detect traffic light states",
-            "Wrote script that undistorts wide-angle camera images",
-            "Developed compression system to send differences between the current and previous frame in a video feed to reduce bandwidth usage in video streaming"
-          ]
-        },
-        {
-          name: "Inventure Accelerator",
-          position: "Media and Outreach",
-          start: "Jan 2018",
-          end: "Present",
-          location: "Ottawa, ON",
-          details: [
-            "Designed and updated the company website, meetinventure.com",
-            "Improved user experience by continuously communicating with clients",
-            "Organized the four-hour SparkFest 2018 event with the Inventure team",
-            "Created SparkFest sponsor video featuring Google and Invest Ottawa"
+            "Created vision system to detect traffic lights and undistort wide-angle images",
+            "Developed compression system to reduce bandwidth usage in video streaming"
           ]
         }
       ],
@@ -337,21 +343,19 @@ export default {
   margin: 0;
 }
 
-.container {
+#resume {
   width: 8.5in;
   height: 11in;
-  margin: 0 auto;
-  padding: 0.3in 0.5in;
+  margin: 0.5in auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 32px 0 rgba(0, 0, 0, 0.08);
 }
 
-.row {
+.container {
+  padding: 0.3in 0.4in;
 }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.row {
+  display: flex;
 }
 
 .column {
@@ -359,39 +363,40 @@ export default {
 }
 
 .left {
-  width: 3in;
+  width: 35%;
 }
 
 .right {
-  width: 5.5in;
+  width: 65%;
 }
 
 .footer {
   text-align: center;
 }
 
-h1 {
+h1,
+h2,
+h3 {
   font-family: "Lato";
+  text-transform: uppercase;
+}
+
+h1 {
   font-weight: 200;
   font-size: 28pt;
-  text-transform: uppercase;
-  color: dimgray;
   margin-bottom: 8px;
+  color: dimgray;
 }
 
 h2 {
-  font-family: "Lato";
   font-weight: 200;
   font-size: 16pt;
-  text-transform: uppercase;
   color: dimgray;
 }
 
 h3 {
-  font-family: "Lato";
   font-weight: 700;
   font-size: 13pt;
-  text-transform: uppercase;
 }
 
 h4 {
@@ -426,7 +431,7 @@ li {
 
 p,
 li {
-  font-size: 11pt;
+  font-size: 10pt;
 }
 
 .right li {
@@ -438,13 +443,6 @@ li {
   position: absolute;
   left: -0.8em;
   font-size: 1.1em;
-}
-
-a {
-  text-decoration: none;
-  outline: none;
-  color: black;
-  font-weight: 400;
 }
 
 .header a {
@@ -464,5 +462,31 @@ section {
 
 #projects div {
   margin-bottom: 4px;
+}
+
+#hackathons li,
+#awards li {
+  margin-left: 8px;
+}
+
+#hackathons span,
+#awards span {
+  margin-left: 16px;
+}
+</style>
+
+<style>
+#resume a {
+  text-decoration: none;
+  outline: none;
+}
+
+#resume li > a {
+  color: black;
+  font-weight: 400;
+}
+
+#resume ::selection {
+  background: lightpink;
 }
 </style>
