@@ -164,8 +164,7 @@ export default {
         {
           href: "mailto:contact@tommydeng.com",
           display: "contact@tommydeng.com"
-        },
-        { href: "mailto:tdeng075@uottawa.ca", display: "tdeng075@uottawa.ca" }
+        }
       ],
       links: [
         { href: "http://tommydeng.com/", display: "tommydeng.com" },
@@ -186,8 +185,9 @@ export default {
           ["Robot Framework"]
         ],
         technologies: [
-          ["Vue", "React", "NodeJS", "Django"],
-          ["LaTeX", "Markdown", "HTML", "CSS"],
+          ["Vue", "React", "NodeJS", "Express"],
+          ["MongoDB", "Laravel", "Django"],
+          ["HTML", "CSS", "LaTeX", "Markdown"],
           ["Virtual Machines", "Linux", "Git"],
           ["VS Code", "Visual Studio", "Eclipse"],
           ["Android Studio", "Unity 3D"],
@@ -223,7 +223,11 @@ export default {
           start: "Jan 2019",
           end: "Apr 2019",
           location: "Ottawa, ON",
-          details: ["_", "_", "_"]
+          details: [
+            "Automated testing of products with Robot Framework and Selenium",
+            "Added functionality to internally developed automation tool using Python",
+            "Fixed bugs in Python scripts used for launching and monitoring test processes"
+          ]
         },
         {
           name: "Global Affairs Canada",
@@ -254,7 +258,7 @@ export default {
         {
           name: "Ottabotics Robot Racing",
           position: "Robotics Competition Team",
-          start: "Sep 2017",
+          start: "Sept 2017",
           end: "Present",
           location: "Ottawa, ON",
           details: [
@@ -346,7 +350,7 @@ export default {
 #resume {
   width: 8.5in;
   height: 11in;
-  margin: 0.5in auto;
+  /* margin: 0.5in auto; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 32px 0 rgba(0, 0, 0, 0.08);
 }
 
@@ -390,19 +394,20 @@ h1 {
 
 h2 {
   font-weight: 200;
-  font-size: 16pt;
+  font-size: 15pt;
   color: dimgray;
 }
 
 h3 {
   font-weight: 700;
-  font-size: 13pt;
+  font-size: 12pt;
 }
 
 h4 {
   font-family: "Raleway";
-  font-size: 13pt;
+  font-size: 11pt;
   font-weight: 600;
+  letter-spacing: 0.4px;
 }
 
 .right h4 {
