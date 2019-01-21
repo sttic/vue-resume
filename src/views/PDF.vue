@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      pdfLink: "http://tommydeng.com"
+      pdfLink: "tommy_deng_resume.pdf"
     };
   }
 };

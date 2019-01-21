@@ -1,7 +1,7 @@
 <template>
   <div class="paper" :style="`height: ${appHeight}px;`">
     <div class="pdf">
-      <a href="http://tommydeng.com">pdf</a>
+      <a :href="pdfLink">pdf</a>
     </div>
     <Resume class="page" :style="`transform: translate(-50%, -50%) scale(${scale});`"/>
   </div>
@@ -31,6 +31,7 @@ export default {
     return {
       letterInch: { width: 8.5, height: 11 },
       inch: 96,
+      pdfLink: "tommy_deng_resume.pdf",
       padX: 0.5,
       padY: 0.5,
       windowWidth: 0,
