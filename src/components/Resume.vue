@@ -43,12 +43,17 @@
           <!-- SKILLS -->
           <section id="skills">
             <h2>Skills</h2>
-            <div v-for="(skill, index) in skills" :key="skill">
+            <div v-for="(skillSet, index) in skills" :key="skillSet">
               <h5 style="text-transform: capitalize;">{{ index }}</h5>
-              <p v-for="item in skill" :key="item">
-                <span v-for="(language, index) in item" :key="index">
-                  <span v-if="index != 0">&bull;</span>
-                  {{ language }}
+              <p v-for="line in skillSet" :key="line">
+                <span v-if="line.length != 0">
+                  <span v-for="(skill, index) in line" :key="index">
+                    <span v-if="index != 0">&bull;</span>
+                    {{ skill }}
+                  </span>
+                </span>
+                <span v-else>
+                  <br>
                 </span>
               </p>
             </div>
@@ -95,7 +100,7 @@
             <div v-for="item in work_experience" :key="item">
               <h3>
                 {{ item.name }}
-                <h4 style="display: inline;">&nbsp;| {{ item.position }}</h4>
+                <span class="position">&nbsp;| {{ item.position }}</span>
               </h3>
               <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
               <ul>
@@ -110,7 +115,7 @@
             <div v-for="item in additional_experience" :key="item">
               <h3>
                 {{ item.name }}
-                <h4 style="display: inline;">&nbsp;| {{ item.position }}</h4>
+                <span class="position">&nbsp;| {{ item.position }}</span>
               </h3>
               <h5>{{ item.start }} – {{ item.end }} | {{ item.location }}</h5>
               <ul>
@@ -125,7 +130,7 @@
             <div v-for="item in projects" :key="item">
               <h3>
                 {{ item.name }}
-                <h5 style="display: inline;">&nbsp;{{ item.tag }} | {{ item.date }}</h5>
+                <span class="project-tag">&nbsp;{{ item.tag }} | {{ item.date }}</span>
               </h3>
               <ul>
                 <li v-for="point in item.details" :key="point">{{ point }}</li>
@@ -187,6 +192,7 @@ export default {
         technologies: [
           ["Vue", "React", "NodeJS", "Express"],
           ["MongoDB", "Laravel", "Django"],
+          [],
           ["HTML", "CSS", "LaTeX", "Markdown"],
           ["Virtual Machines", "Linux", "Git"],
           ["VS Code", "Visual Studio", "Eclipse"],
@@ -200,8 +206,8 @@ export default {
         ]
       },
       hackathons: [
-        { name: "UOttaHack", date: "2019" },
-        { name: "ConUHacks", date: "2019" },
+        // { name: "UOttaHack", date: "2019" },
+        // { name: "ConUHacks", date: "2019" },
         { name: "Hack Western", date: "2018" },
         { name: "Hack the North", date: "2018" },
         { name: "CU Hacks", date: "2018" },
@@ -221,11 +227,11 @@ export default {
           name: "Ross Video",
           position: "Software Developer",
           start: "Jan 2019",
-          end: "Apr 2019",
+          end: "Present",
           location: "Ottawa, ON",
           details: [
             "Automated testing of products with Robot Framework and Selenium",
-            "Added functionality to internally developed automation tool using Python",
+            "Added functionality to internally developed automation tool using Java",
             "Fixed bugs in Python scripts used for launching and monitoring test processes"
           ]
         },
@@ -340,22 +346,17 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Lato:200,300,400,700|Raleway:600");
-
 * {
   padding: 0;
   margin: 0;
 }
 
 #resume {
-  width: 8.5in;
-  height: 11in;
-  /* margin: 0.5in auto; */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 32px 0 rgba(0, 0, 0, 0.08);
+  background: white;
 }
 
 .container {
-  padding: 0.3in 0.4in;
+  margin: 0.3in 0.4in;
 }
 
 .row {
@@ -388,7 +389,7 @@ h3 {
 h1 {
   font-weight: 200;
   font-size: 28pt;
-  margin-bottom: 8px;
+  margin-bottom: 0.1in;
   color: dimgray;
 }
 
@@ -403,21 +404,23 @@ h3 {
   font-size: 12pt;
 }
 
-h4 {
+h4,
+.position {
   font-family: "Raleway";
-  font-size: 11pt;
+  font-size: 12pt;
   font-weight: 600;
   letter-spacing: 0.4px;
 }
 
-.right h4 {
+.position {
   text-transform: initial;
   font-variant: small-caps;
 }
 
-h5 {
+h5,
+.project-tag {
   font-family: "Raleway";
-  font-size: 11pt;
+  font-size: 10pt;
   color: dimgray;
   text-transform: initial;
 }
@@ -462,7 +465,7 @@ section {
 #skills div,
 #work div,
 #additional div {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 #projects div {
