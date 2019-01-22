@@ -484,13 +484,7 @@ section {
 </style>
 
 <style>
-#resume a {
-  text-decoration: none;
-  outline: none;
-}
-
 #resume li > a {
-  color: black;
   font-weight: 400;
 }
 

@@ -24,4 +24,10 @@ body {
   position: relative;
   background: white;
 }
+
+a {
+  text-decoration: none;
+  outline: none;
+  color: initial;
+}
 </style>
