@@ -196,8 +196,7 @@ export default {
           ["HTML", "CSS", "LaTeX", "Markdown"],
           ["Virtual Machines", "Linux", "Git"],
           ["VS Code", "Visual Studio", "Eclipse"],
-          ["Android Studio", "Unity 3D"],
-          ["Blender", "Adobe CC"]
+          ["Android Studio", "Unity 3D"]
         ],
         development: [
           ["Agile", "CI", "VC", "UML"],
@@ -206,8 +205,8 @@ export default {
         ]
       },
       hackathons: [
-        // { name: "UOttaHack", date: "2019" },
-        // { name: "ConUHacks", date: "2019" },
+        { name: "UOttaHack", date: "2019" },
+        { name: "ConUHacks", date: "2019" },
         { name: "Hack Western", date: "2018" },
         { name: "Hack the North", date: "2018" },
         { name: "CU Hacks", date: "2018" },
@@ -232,7 +231,7 @@ export default {
           details: [
             "Automated testing of products with Robot Framework and Selenium",
             "Added functionality to internally developed automation tool using Java",
-            "Fixed bugs in Python scripts used for launching and monitoring test processes"
+            "Resolved errors in scripts used for launching and monitoring test processes"
           ]
         },
         {
@@ -328,7 +327,8 @@ export default {
           tag: "Personal Project",
           date: "Aug 2017",
           details: [
-            "Generated animated graphic representing a typical lifespan using CImg in C++"
+            "Generated animated graphic representing a typical lifespan using CImg in C++",
+            "Gathered over 100,000 views after posting project in data visualization group"
           ]
         },
         {
@@ -336,7 +336,7 @@ export default {
           tag: "ICS3U",
           date: "Jun 2016",
           details: [
-            "Designed Unity 3D game in C# about a personified potato roaming around an open world"
+            "Designed Unity 3D game in C# about a personified potato roaming the world"
           ]
         }
       ]
@@ -388,7 +388,7 @@ h3 {
 
 h1 {
   font-weight: 200;
-  font-size: 28pt;
+  font-size: 25pt;
   margin-bottom: 0.1in;
   color: dimgray;
 }
