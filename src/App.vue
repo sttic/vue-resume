@@ -13,6 +13,10 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Lato:200,300,400,700|Raleway:600");
 
+html {
+  -webkit-print-color-adjust: exact;
+}
+
 body {
   margin: 0;
 }
