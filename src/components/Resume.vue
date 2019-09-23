@@ -21,25 +21,16 @@
 
           <!-- EDUCATION -->
           <section id="education">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="university" />Education
-              <div class="section-line-left" />
-            </h2>
+            <h2>Education</h2>
             <h4>{{ education.school }}</h4>
             <h5>{{ education.degree }}</h5>
-            <p>
-              {{ education.progress }} - Expected {{ education.expected }}
-              <br />
-              GPA: {{ education.gpa }}
-            </p>
+            <p>{{ education.progress }} - GPA: {{ education.gpa }}</p>
+            <p v-for="award in awards" :key="award.name">{{ award.name }}</p>
           </section>
 
           <!-- SKILLS -->
           <section id="skills">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="tools" />Skills
-              <div class="section-line-left" />
-            </h2>
+            <h2>Skills</h2>
             <div v-for="(skillSet, category) in skills" :key="JSON.stringify(skillSet)">
               <h5 style="text-transform: capitalize;">{{ category }}</h5>
               <p v-for="line in skillSet" :key="JSON.stringify(line)">
@@ -58,10 +49,7 @@
 
           <!-- HACKATHONS -->
           <section id="hackathons">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="coffee" />Hackathons
-              <div class="section-line-left" />
-            </h2>
+            <h2>Hackathons</h2>
             <ul>
               <li v-for="item in hackathons" :key="JSON.stringify(item)">
                 {{ item.date }}
@@ -70,23 +58,9 @@
             </ul>
           </section>
 
-          <!-- AWARDS -->
-          <section id="awards">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="award" />Awards
-              <div class="section-line-left" />
-            </h2>
-            <ul>
-              <li v-for="item in awards" :key="JSON.stringify(item)">{{ item.name }}</li>
-            </ul>
-          </section>
-
           <!-- INTERESTS -->
           <section id="interests">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="lightbulb" />Interests
-              <div class="section-line-left" />
-            </h2>
+            <h2>Interests</h2>
             <p v-for="item in interests" :key="JSON.stringify(item)">
               <span v-for="(interest, index) in item" :key="index">
                 <span v-if="index != 0">&bull;</span>
@@ -99,22 +73,20 @@
         <div class="column right">
           <!-- WORK EXPERIENCE -->
           <section id="work">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="briefcase" />Work Experience
-              <div class="section-line-right" />
-            </h2>
+            <h2>Work Experience</h2>
             <div v-for="item in work_experience" :key="JSON.stringify(item)">
               <h3>
-                <a v-if="item.website" :href="item.website">{{ item.name }}</a>
-                <span v-else>{{ item.name }}</span>
-                <span class="time-location">{{ item.location }}</span>
-              </h3>
-              <div class="position">
-                <h4>
+                <a
+                  v-if="item.website"
+                  class="organization-name"
+                  :href="item.website"
+                >{{ item.name }}</a>
+                <span v-else class="organization-name">{{ item.name }}</span>
+                <span class="position">
                   {{ item.position }}
                   <span class="time-location">{{ item.start }} – {{ item.end }}</span>
-                </h4>
-              </div>
+                </span>
+              </h3>
               <ul>
                 <li v-for="point in item.details" :key="point">{{ point }}</li>
               </ul>
@@ -123,22 +95,20 @@
 
           <!-- ADDITIONAL EXPERIENCE -->
           <section id="additional">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="users" />Additional Experience
-              <div class="section-line-right" />
-            </h2>
+            <h2>Additional Experience</h2>
             <div v-for="item in additional_experience" :key="JSON.stringify(item)">
               <h3>
-                <a v-if="item.website" :href="item.website">{{ item.name }}</a>
+                <a
+                  class="organization-name"
+                  v-if="item.website"
+                  :href="item.website"
+                >{{ item.name }}</a>
                 <span v-else>{{ item.name }}</span>
-                <span class="time-location">{{ item.location }}</span>
-              </h3>
-              <div class="position">
-                <h4>
+                <span class="position">
                   {{ item.position }}
                   <span class="time-location">{{ item.start }} – {{ item.end }}</span>
-                </h4>
-              </div>
+                </span>
+              </h3>
               <ul>
                 <li id="rawhtml" v-for="point in item.details" :key="point" v-html="point"></li>
               </ul>
@@ -147,15 +117,12 @@
 
           <!-- PROJECTS -->
           <section id="projects">
-            <h2>
-              <font-awesome-icon class="section-icon" icon="laptop-code" />Projects
-              <div class="section-line-right" />
-            </h2>
+            <h2>Projects</h2>
             <div class="project" v-for="item in projects" :key="JSON.stringify(item)">
               <h3>
-                <a v-if="item.link" :href="item.link">{{ item.name }}</a>
-                <span v-else>{{ item.name }}</span>
-                <span class="project-tag">{{ item.tag }}</span>
+                <a class="organization-name" v-if="item.link" :href="item.link">{{ item.name }}</a>
+                <span v-else class="organization-name">{{ item.name }}</span>
+                <span v-if="item.tag" class="project-tag">{{ item.tag }}</span>
                 <span class="time-location">{{ item.date }}</span>
               </h3>
               <ul>
@@ -188,8 +155,7 @@ export default {
         school: "University of Ottawa",
         degree: "BASc Software Engineering",
         progress: "3rd Year",
-        expected: "Jun 2022",
-        gpa: "3.9/4.0 (Dean's Honour List)"
+        gpa: "3.9/4.0"
       },
       links: [
         {
@@ -256,7 +222,7 @@ export default {
           name: "Kinaxis",
           website: "https://www.kinaxis.com/en",
           position: "Analytics Software Developer",
-          start: "Sept 2019",
+          start: "Sept",
           end: "Dec 2019",
           location: "Ottawa, ON",
           details: [
@@ -269,8 +235,8 @@ export default {
         {
           name: "Ross Video",
           website: "https://www.rossvideo.com/",
-          position: "Automation Software Developer | R&D Operations",
-          start: "Jan 2019",
+          position: "Automation Software Developer",
+          start: "Jan",
           end: "Apr 2019",
           location: "Ottawa, ON",
           details: [
@@ -284,8 +250,8 @@ export default {
           name: "Global Affairs Canada",
           website:
             "https://www.international.gc.ca/gac-amc/index.aspx?lang=eng",
-          position: "Software Quality Control Analyst",
-          start: "May 2018",
+          position: "Software QA Analyst",
+          start: "May",
           end: "Aug 2018",
           location: "Ottawa, ON",
           details: [
@@ -299,7 +265,7 @@ export default {
         {
           name: "Inventure Accelerator",
           website: "https://meetinventure.com/",
-          position: "Front-end Developer & Media Producer",
+          position: "Front-end Developer",
           start: "Jan 2018",
           end: "Present",
           location: "Ottawa, ON",
@@ -310,7 +276,7 @@ export default {
           ]
         },
         {
-          name: "Ottabotics Robot Racing",
+          name: "Ottabotics",
           website: "https://ca.linkedin.com/company/ottabotics",
           position: "Robotics Competition Team",
           start: "Sept 2017",
@@ -327,7 +293,6 @@ export default {
         {
           name: "Bark Buddies",
           link: "https://github.com/viviandiec/barkbuddies",
-          tag: "UI Design Course Group Project",
           date: "Summer 2019",
           details: [
             "Collaborated with team to build mobile app that connects dogs to other dogs",
@@ -338,7 +303,6 @@ export default {
         {
           name: "Life's Charge Visualization",
           link: "https://www.tommydeng.com/projects/lifes-charge/",
-          tag: "Personal Project",
           date: "Aug 2017",
           details: [
             "Generated animated graphic representing a typical lifespan using CImg in C++",
@@ -349,7 +313,6 @@ export default {
         {
           name: "Potato Simulator",
           link: "https://www.tommydeng.com/projects/potato-simulator/",
-          tag: "Computer Studies Course Summative",
           date: "Jun 2016",
           details: [
             "Designed Unity 3D game in C# about a personified potato roaming the world",
@@ -388,12 +351,23 @@ export default {
 
 .left {
   width: 30%;
-  background-color: rgba(0, 122, 204, 0.05);
+  background-color: #166fb4;
   padding-top: 0.4in;
   padding-left: 0.4in;
   /* excess padding at bottom to fill otherwise white space with gray background on pdf export */
   /* need to limit pdf to 1 page when exporting */
   padding-bottom: 100%;
+  color: white;
+}
+
+.left h2,
+.left h5 {
+  color: white;
+}
+
+.left p,
+.left li {
+  font-weight: 400;
 }
 
 .right {
@@ -404,11 +378,13 @@ export default {
 .footer {
   text-align: center;
   font-family: "Lato";
-  font-weight: 300;
+  font-weight: 400;
+  color: #373741;
 }
 
 .footer a {
-  font-weight: 400;
+  font-weight: 600;
+  color: #373741;
 }
 
 h1,
@@ -430,19 +406,20 @@ h1 {
 #name a {
   font-weight: 400;
   letter-spacing: 4px;
-  color: rgb(0, 122, 204);
+  color: white;
 }
 
 h2 {
-  font-weight: 400;
+  font-weight: 800;
   font-size: 15pt;
-  color: rgb(0, 122, 204);
+  color: #373741;
+  margin-bottom: 8px;
 }
 
 h3 {
   font-weight: 700;
   font-size: 12pt;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.6px;
 }
 
 h4,
@@ -452,13 +429,11 @@ h4,
   font-weight: 600;
 }
 
-.position h4 {
+.position {
   font-size: 10pt;
   letter-spacing: 0.4px;
-}
-
-.position span {
-  letter-spacing: initial;
+  color: #3a95b4;
+  margin-left: 2px;
 }
 
 h5,
@@ -466,8 +441,12 @@ h5,
 .time-location {
   font-family: "Raleway";
   font-size: 10pt;
-  color: dimgray;
+  color: #3a95b4;
   text-transform: initial;
+}
+
+.organization-name {
+  color: #166fb4;
 }
 
 .time-location {
@@ -504,8 +483,13 @@ li {
   font-size: 10pt;
 }
 
+.right h3 {
+  margin-bottom: 4px;
+}
+
 .right li {
-  margin-left: 24px;
+  margin-left: 20px;
+  color: #373741;
 }
 
 .right li::before {
@@ -528,6 +512,10 @@ section {
   padding: 1px 0;
 }
 
+#links a {
+  color: white;
+}
+
 .section-icon {
   padding-right: 6px;
   color: black;
@@ -535,30 +523,25 @@ section {
 
 #links .icon {
   padding-right: 6px;
-  font-size: 18px;
-}
-
-.section-line-left {
-  margin-right: 0.4in;
-  height: 2px;
-  margin-top: 2px;
-  margin-bottom: 4px;
-  border-radius: 1px;
-  background-color: rgba(53, 73, 94, 0.25);
-}
-
-.section-line-right {
-  height: 2px;
-  margin-top: 2px;
-  margin-bottom: 4px;
-  border-radius: 1px;
-  background-color: rgba(53, 73, 94, 0.25);
+  font-size: 16px;
 }
 
 #skills > div,
 #work > div,
 #additional > div {
   margin-bottom: 16px;
+}
+
+li,
+#education p,
+#skills p,
+#interests p {
+  line-height: 13.5pt;
+  font-weight: 400;
+}
+
+#education h5 {
+  margin-bottom: 4px;
 }
 
 #projects > .project {
