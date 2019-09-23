@@ -1,9 +1,11 @@
 <template>
   <div class="paper" :style="`height: ${appHeight}px;`">
     <div class="pdf">
-      <a :href="pdfLink">pdf</a>
+      <a :href="pdfLink">
+        <p>PDF</p>
+      </a>
     </div>
-    <Resume class="page" :style="`transform: translate(-50%, -50%) scale(${scale});`"/>
+    <Resume class="page" :style="`transform: translate(-50%, -50%) scale(${scale}); height: ${letterInch.height}in;`" />
   </div>
 </template>
 
@@ -32,8 +34,8 @@ export default {
       letterInch: { width: 8.5, height: 11 },
       inch: 96,
       pdfLink: "tommy_deng_resume.pdf",
-      padX: 0.5,
-      padY: 0.5,
+      padX: 1,
+      padY: 1,
       windowWidth: 0,
       windowHeight: 0
     };
@@ -68,8 +70,7 @@ export default {
 
 .page {
   width: 8.5in;
-  height: 11in;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 6px 32px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 32px 0 rgba(0, 0, 0, 0.5);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -81,19 +82,29 @@ export default {
   font-weight: 300;
   text-align: center;
   user-select: none;
+  padding-top: 0.15in;
 }
 
 .pdf a {
+  background-color: white;
+  border: 2px black solid;
+  margin: auto;
+  border-radius: 200px;
   color: black;
   text-decoration: none;
   display: inline-block;
   margin: 12px 0;
-  opacity: 0.2;
   transition: 1s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.pdf p {
+  margin: 8px 0.5in 12px 0.5in;
+  font-weight: 400;
 }
 
 .pdf a:hover {
-  opacity: 0.6;
-  transition: 1s;
+  background-color: #f6f6f6;
+  transition: 0.5s;
 }
 </style>

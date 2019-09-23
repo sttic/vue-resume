@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -26,7 +26,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  background: white;
+  background-color: #303030;
+  background-image: url("assets/overlay.png");
+  background-repeat: repeat;
 }
 
 a {
