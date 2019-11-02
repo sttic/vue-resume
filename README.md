@@ -25,5 +25,12 @@ npm run test
 npm run lint
 ```
 
+### Export PDF
+```
+npm run pdf
+```
+
+Run while app is active on http://localhost:8080/ to export PDF into the `public/` folder.
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

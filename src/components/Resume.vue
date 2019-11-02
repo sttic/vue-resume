@@ -4,7 +4,7 @@
       <div class="row">
         <div class="column left">
           <h1 id="name">
-            <a href="http://tommydeng.com/">{{ firstName }} {{ lastName }}</a>
+            <a :href="website">{{ first_name }} {{ last_name }}</a>
           </h1>
 
           <!-- LINKS -->
@@ -13,7 +13,7 @@
               <li v-for="item in links" :key="JSON.stringify(item)">
                 <a :href="item.href">
                   <font-awesome-icon class="icon" :icon="item.icon" />
-                  {{ item.display }}
+                  <span class="display-link">{{ item.display }}</span>
                 </a>
               </li>
             </ul>
@@ -24,34 +24,44 @@
             <h2>Education</h2>
             <h4>{{ education.school }}</h4>
             <h5>{{ education.degree }}</h5>
-            <p>{{ education.progress }} - GPA: {{ education.gpa }}</p>
-            <p v-for="award in awards" :key="award.name">{{ award.name }}</p>
+            <p v-for="line in education.details" :key="JSON.stringify(line)">
+              <span v-if="line.length !== 0">
+                <span v-for="(interest, index) in line" :key="index">
+                  <span v-if="index !== 0" class="bullet-sep" />
+                  {{ interest }}
+                </span>
+              </span>
+              <span v-else>
+                <div class="bullet-list-break" />
+              </span>
+            </p>
           </section>
 
           <!-- SKILLS -->
           <section id="skills">
-            <h2>Skills</h2>
-            <div v-for="(skillSet, category) in skills" :key="JSON.stringify(skillSet)">
-              <h5 style="text-transform: capitalize;">{{ category }}</h5>
-              <p v-for="line in skillSet" :key="JSON.stringify(line)">
-                <span v-if="line.length !== 0">
-                  <span v-for="(skill, index) in line" :key="index">
-                    <span v-if="index != 0">&bull;</span>
-                    {{ skill }}
-                  </span>
-                </span>
-                <span v-else>
-                  <br />
-                </span>
-              </p>
+            <h2>{{ skills.title }}</h2>
+            <div v-for="skillSet in skills.content" :key="JSON.stringify(skillSet)">
+              <h5>{{ skillSet.category }}</h5>
+              <div v-for="(group, i) in skillSet.groups" :key="JSON.stringify(group)">
+                <div v-for="(skill, j) in group" :key="skill">
+                  <p v-if="j % 2 === 0" class="left-skills">
+                    {{ group[j] }}
+                    <span
+                      v-if="j + 1 < group.length"
+                      class="right-skills"
+                    >{{ group[j + 1] }}</span>
+                  </p>
+                </div>
+                <div v-if="i !== skillSet.groups.length - 1" class="bullet-list-break" />
+              </div>
             </div>
           </section>
 
           <!-- HACKATHONS -->
           <section id="hackathons">
-            <h2>Hackathons</h2>
+            <h2>{{ hackathons.title }}</h2>
             <ul>
-              <li v-for="item in hackathons" :key="JSON.stringify(item)">
+              <li v-for="item in hackathons.content" :key="JSON.stringify(item)">
                 {{ item.date }}
                 <span>{{ item.name }}</span>
               </li>
@@ -60,11 +70,16 @@
 
           <!-- INTERESTS -->
           <section id="interests">
-            <h2>Interests</h2>
-            <p v-for="item in interests" :key="JSON.stringify(item)">
-              <span v-for="(interest, index) in item" :key="index">
-                <span v-if="index != 0">&bull;</span>
-                {{ interest }}
+            <h2>{{ interests.title }}</h2>
+            <p v-for="line in interests.content" :key="JSON.stringify(line)">
+              <span v-if="line.length !== 0">
+                <span v-for="(interest, index) in line" :key="index">
+                  <span v-if="index !== 0" class="bullet-sep" />
+                  {{ interest }}
+                </span>
+              </span>
+              <span v-else>
+                <div class="bullet-list-break" />
               </span>
             </p>
           </section>
@@ -72,70 +87,67 @@
 
         <div class="column right">
           <!-- WORK EXPERIENCE -->
-          <section id="work">
-            <h2>Work Experience</h2>
-            <div v-for="item in work_experience" :key="JSON.stringify(item)">
+          <section id="work" class="experience">
+            <h2>{{ work_experience.title }}</h2>
+            <div v-for="item in work_experience.content" :key="JSON.stringify(item)">
               <h3>
                 <a
                   v-if="item.website"
-                  class="organization-name"
+                  class="experience-header-primary"
                   :href="item.website"
-                >{{ item.name }}</a>
-                <span v-else class="organization-name">{{ item.name }}</span>
-                <span class="position">
-                  {{ item.position }}
-                  <span class="time-location">{{ item.start }} – {{ item.end }}</span>
-                </span>
+                >{{ item.title_primary }}</a>
+                <span v-else class="experience-header-primary">{{ item.title_primary }}</span>
+                <span class="experience-header-secondary">{{ item.title_secondary }}</span>
+                <span class="date-info">{{ item.date }}</span>
               </h3>
               <ul>
-                <li v-for="point in item.details" :key="point">{{ point }}</li>
+                <li v-for="point in item.details" :key="point" v-html="point" />
               </ul>
             </div>
           </section>
 
           <!-- ADDITIONAL EXPERIENCE -->
-          <section id="additional">
-            <h2>Additional Experience</h2>
-            <div v-for="item in additional_experience" :key="JSON.stringify(item)">
+          <section id="additional" class="experience">
+            <h2>{{ additional_experience.title }}</h2>
+            <div v-for="item in additional_experience.content" :key="JSON.stringify(item)">
               <h3>
                 <a
-                  class="organization-name"
                   v-if="item.website"
+                  class="experience-header-primary"
                   :href="item.website"
-                >{{ item.name }}</a>
-                <span v-else>{{ item.name }}</span>
-                <span class="position">
-                  {{ item.position }}
-                  <span class="time-location">{{ item.start }} – {{ item.end }}</span>
-                </span>
+                >{{ item.title_primary }}</a>
+                <span v-else class="experience-header-primary">{{ item.title_primary }}</span>
+                <span class="experience-header-secondary">{{ item.title_secondary }}</span>
+                <span class="date-info">{{ item.date }}</span>
               </h3>
               <ul>
-                <li id="rawhtml" v-for="point in item.details" :key="point" v-html="point"></li>
+                <li v-for="point in item.details" :key="point" v-html="point" />
               </ul>
             </div>
           </section>
 
           <!-- PROJECTS -->
-          <section id="projects">
-            <h2>Projects</h2>
-            <div class="project" v-for="item in projects" :key="JSON.stringify(item)">
+          <section id="projects" class="experience">
+            <h2>{{ projects.title }}</h2>
+            <div v-for="item in projects.content" :key="JSON.stringify(item)">
               <h3>
-                <a class="organization-name" v-if="item.link" :href="item.link">{{ item.name }}</a>
-                <span v-else class="organization-name">{{ item.name }}</span>
-                <span v-if="item.tag" class="project-tag">{{ item.tag }}</span>
-                <span class="time-location">{{ item.date }}</span>
+                <a
+                  v-if="item.website"
+                  class="experience-header-primary"
+                  :href="item.website"
+                >{{ item.title_primary }}</a>
+                <span v-else class="experience-header-primary">{{ item.title_primary }}</span>
+                <span class="experience-header-secondary">{{ item.title_secondary }}</span>
+                <span class="date-info">{{ item.date }}</span>
               </h3>
               <ul>
-                <li v-for="point in item.details" :key="point">{{ point }}</li>
+                <li v-for="point in item.details" :key="point" v-html="point" />
               </ul>
             </div>
           </section>
 
           <div class="footer">
-            <div>
-              Please see
-              <a href="https://www.tommydeng.com/">tommydeng.com</a> for projects
-            </div>
+            <div v-html="footer_message" />
           </div>
         </div>
       </div>
@@ -144,183 +156,13 @@
 </template>
 
 <script>
+import content from "@/content";
+
 export default {
   name: "Resume",
   props: {},
   data() {
-    return {
-      firstName: "Tommy",
-      lastName: "Deng",
-      education: {
-        school: "University of Ottawa",
-        degree: "BASc Software Engineering",
-        progress: "3rd Year",
-        gpa: "3.9/4.0"
-      },
-      links: [
-        {
-          href: "mailto:contact@tommydeng.com",
-          display: "contact@tommydeng.com",
-          icon: "envelope"
-        },
-        {
-          href: "http://tommydeng.com/",
-          display: "tommydeng.com",
-          icon: "globe-americas"
-        },
-        {
-          href: "https://github.com/sttic",
-          display: "github.com/sttic",
-          icon: ["fab", "github"]
-        },
-        {
-          href: "https://www.linkedin.com/in/tommydeng/",
-          display: "linkedin.com/in/tommydeng",
-          icon: ["fab", "linkedin-in"]
-        }
-      ],
-      skills: {
-        languages: [["Python", "JavaScript", "Java"]],
-        technologies: [
-          ["GCP", "AWS", "Azure"],
-          ["Vue", "React", "React Native"],
-          ["NodeJS", "Express", "MongoDB"],
-          ["Django", "Flask", "Firebase"],
-          [],
-          ["HTML", "CSS", "Bootstrap"],
-          ["Virtual Machines", "Linux", "Bash"],
-          ["Git", "SVN", "Jira", "GitHub"],
-          ["VS Code", "Visual Studio", "Eclipse"]
-        ],
-        development: [
-          ["Agile", "CI", "VC", "UML"],
-          ["Data Structures & Algorithms"],
-          ["Object Oriented Design"]
-        ]
-      },
-      hackathons: [
-        { name: "Hack the North", date: "2019" },
-        { name: "Hack The 6ix", date: "2019" },
-        { name: "UOttaHack", date: "2019" },
-        { name: "ConUHacks", date: "2019" },
-        { name: "Hack Western", date: "2018" },
-        { name: "Hack the North", date: "2018" },
-        { name: "CU Hacks", date: "2018" },
-        { name: "UOttaHack", date: "2018" }
-      ],
-      awards: [
-        { name: "Merit Scholarship (×3)" },
-        { name: "$4000 Admission Scholarship" }
-      ],
-      interests: [
-        ["Project Management"],
-        ["Machine Learning", "Data Science"],
-        ["Web Development"]
-      ],
-      work_experience: [
-        {
-          name: "Kinaxis",
-          website: "https://www.kinaxis.com/en",
-          position: "Analytics Software Developer",
-          start: "Sept",
-          end: "Dec 2019",
-          location: "Ottawa, ON",
-          details: [
-            "Implemented dynamic color algorithm based on W3C web standards equations to provide optimal visibility of network visualization node shape icons",
-            "Built performant and interactive visualizations using D3, Highcharts, and Viz.js",
-            "Worked closely with senior developers on feature development and bug fixes",
-            "Collaborated with agile team members and other stakeholders to conceptualize and prototype the product's next-gen visualization capabilities"
-          ]
-        },
-        {
-          name: "Ross Video",
-          website: "https://www.rossvideo.com/",
-          position: "Automation Software Developer",
-          start: "Jan",
-          end: "Apr 2019",
-          location: "Ottawa, ON",
-          details: [
-            "Streamlined testing of camera control system with Robot Framework overhaul to provide a >2 times speed improvement in test execution",
-            "Added functionalities to internally developed Java-based automation libraries to allow testing of previously blocked video control and monitoring features",
-            "Provided training on automation framework usage for Swing/Eclipse applications",
-            "Created and maintained regularly used environment setup and utility scripts"
-          ]
-        },
-        {
-          name: "Global Affairs Canada",
-          website:
-            "https://www.international.gc.ca/gac-amc/index.aspx?lang=eng",
-          position: "Software QA Analyst",
-          start: "May",
-          end: "Aug 2018",
-          location: "Ottawa, ON",
-          details: [
-            "Read and followed system diagrams for the Export Import Control System project",
-            "Used Microsoft Test Manager and Team Foundation Server for executing quality control tests and achieved 100% coverage for each testing cycle",
-            "Trained consultants on toolset usage, testing workflow, and system requirements"
-          ]
-        }
-      ],
-      additional_experience: [
-        {
-          name: "Inventure Accelerator",
-          website: "https://meetinventure.com/",
-          position: "Front-end Developer",
-          start: "Jan 2018",
-          end: "Present",
-          location: "Ottawa, ON",
-          details: [
-            `Designed and deployed startup website (<a href="https://meetinventure.com/">meetinventure.com</a>) using Vue and Netlify to promote sponsorship, event outreach, and media attention`,
-            "Organized the four-hour, 80 attendee, SparkFest 2018 event with Inventure team",
-            "Created SparkFest sponsor video featuring Google and Invest Ottawa"
-          ]
-        },
-        {
-          name: "Ottabotics",
-          website: "https://ca.linkedin.com/company/ottabotics",
-          position: "Robotics Competition Team",
-          start: "Sept 2017",
-          end: "Dec 2018",
-          location: "Ottawa, ON",
-          details: [
-            "Automated Blender with Python to render photorealistic videos of racing tracks for use as training data and driving simulation for autonomous vehicle",
-            "Created vision system to detect traffic lights and undistort wide-angle images",
-            "Developed compression system to reduce bandwidth usage in video streaming"
-          ]
-        }
-      ],
-      projects: [
-        {
-          name: "Bark Buddies",
-          link: "https://github.com/viviandiec/barkbuddies",
-          date: "Summer 2019",
-          details: [
-            "Collaborated with team to build mobile app that connects dogs to other dogs",
-            "Used React Native to create a high-fidelity prototype with navigation to all screens",
-            "Implemented field response, Tinder-style swiping, and persistent messaging system"
-          ]
-        },
-        {
-          name: "Life's Charge Visualization",
-          link: "https://www.tommydeng.com/projects/lifes-charge/",
-          date: "Aug 2017",
-          details: [
-            "Generated animated graphic representing a typical lifespan using CImg in C++",
-            "Gathered over 100,000 views after posting project in data visualization group",
-            "Ported concept to dynamic website that generates customized images using PixiJS"
-          ]
-        },
-        {
-          name: "Potato Simulator",
-          link: "https://www.tommydeng.com/projects/potato-simulator/",
-          date: "Jun 2016",
-          details: [
-            "Designed Unity 3D game in C# about a personified potato roaming the world",
-            "Won subject award for the course as a result of the project and related work"
-          ]
-        }
-      ]
-    };
+    return content;
   }
 };
 </script>
@@ -351,8 +193,9 @@ export default {
 
 .left {
   width: 30%;
+  height: 100%;
   background-color: #166fb4;
-  padding-top: 0.4in;
+  padding-top: 0.3in;
   padding-left: 0.4in;
   /* excess padding at bottom to fill otherwise white space with gray background on pdf export */
   /* need to limit pdf to 1 page when exporting */
@@ -370,25 +213,35 @@ export default {
   font-weight: 400;
 }
 
+.bullet-sep::before {
+  content: "·";
+  font-weight: bold;
+  margin: 0 3px;
+}
+
+.bullet-list-break {
+  height: 8px;
+}
+
 .right {
   width: 70%;
-  padding: 0.4in 0.4in 0 0.25in;
+  padding: 0.3in 0.4in 0 0.25in;
 }
 
 .footer {
   text-align: center;
   font-family: "Lato";
-  font-weight: 400;
-  color: #373741;
+  color: #3d3d3d;
 }
 
-.footer a {
+.footer >>> a {
   font-weight: 600;
-  color: #373741;
+  color: #3d3d3d;
 }
 
 h1,
-h2 {
+h2,
+h6 {
   font-family: "Lato";
   text-transform: uppercase;
 }
@@ -412,49 +265,50 @@ h1 {
 h2 {
   font-weight: 800;
   font-size: 15pt;
-  color: #373741;
+  color: #3d3d3d;
   margin-bottom: 8px;
+  letter-spacing: 0.5pt;
 }
 
 h3 {
   font-weight: 700;
   font-size: 12pt;
-  letter-spacing: 0.6px;
 }
 
 h4,
-.position {
+.experience-header-secondary {
   font-family: "Raleway";
   font-size: 12pt;
   font-weight: 600;
 }
 
-.position {
-  font-size: 10pt;
-  letter-spacing: 0.4px;
+.experience-header-secondary {
   color: #3a95b4;
-  margin-left: 2px;
+  font-size: 10pt;
+  letter-spacing: 0.2px;
+  margin-left: 5px;
 }
 
 h5,
-.project-tag,
-.time-location {
+.date-info {
   font-family: "Raleway";
   font-size: 10pt;
+}
+
+h6 {
+  font-size: 10pt;
+}
+
+.date-info {
   color: #3a95b4;
-  text-transform: initial;
-}
-
-.organization-name {
-  color: #166fb4;
-}
-
-.time-location {
   float: right;
 }
 
-.project-tag {
-  margin-left: 6px;
+.experience-header-primary {
+  font-family: "Lato";
+  line-height: 12px;
+  letter-spacing: 0.2px;
+  color: #166fb4;
 }
 
 #resume >>> a {
@@ -489,14 +343,14 @@ li {
 
 .right li {
   margin-left: 20px;
-  color: #373741;
+  color: #3d3d3d;
 }
 
 .right li::before {
   content: "\2022";
   position: absolute;
-  left: -0.8em;
-  font-size: 1.1em;
+  left: -1em;
+  font-size: 0.8em;
 }
 
 .header a {
@@ -516,19 +370,20 @@ section {
   color: white;
 }
 
-.section-icon {
-  padding-right: 6px;
-  color: black;
-}
-
 #links .icon {
   padding-right: 6px;
   font-size: 16px;
 }
 
-#skills > div,
-#work > div,
-#additional > div {
+#links .display-link {
+  margin-left: 4px;
+}
+
+#skills > div {
+  margin-bottom: 12px;
+}
+
+.experience > div {
   margin-bottom: 16px;
 }
 
@@ -540,12 +395,20 @@ li,
   font-weight: 400;
 }
 
-#education h5 {
+#skills h5 {
+  text-transform: uppercase;
   margin-bottom: 4px;
+  letter-spacing: 0.2pt;
 }
 
-#projects > .project {
-  margin-bottom: 12px;
+#skills .left-skills {
+  position: relative;
+  margin-left: 8px;
+}
+
+#skills .right-skills {
+  position: absolute;
+  left: 90px;
 }
 
 #hackathons li {
@@ -555,14 +418,12 @@ li,
 #hackathons span {
   margin-left: 16px;
 }
-</style>
 
-<style>
 #resume li > a {
   font-weight: 400;
 }
 
 #resume ::selection {
-  background: #ccccff;
+  background: #aaaaff80;
 }
 </style>
