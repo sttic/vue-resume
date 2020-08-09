@@ -11,7 +11,23 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Lato:200,300,400,700|Raleway:600");
+@font-face {
+  font-family: Lato;
+  src: url(/fonts/Lato-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url(/fonts/Lato-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(/fonts/Raleway-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+}
 
 html {
   -webkit-print-color-adjust: exact;

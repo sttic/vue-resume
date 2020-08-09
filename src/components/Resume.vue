@@ -146,7 +146,7 @@
             </div>
           </section>
 
-          <div class="footer">
+          <div class="footer" v-if="footer_message">
             <div v-html="footer_message" />
           </div>
         </div>
@@ -192,7 +192,7 @@ export default {
 }
 
 .left {
-  width: 30%;
+  width: 25%;
   height: 100%;
   background-color: #166fb4;
   padding-top: 0.3in;
@@ -225,17 +225,20 @@ export default {
 
 .right {
   width: 70%;
-  padding: 0.3in 0.4in 0 0.25in;
+  padding-top: 0.3in;
+  padding-left: 0.25in;
+  padding-right: 0.4in;
 }
 
 .footer {
   text-align: center;
   font-family: "Lato";
+  font-size: 10pt;
   color: #3d3d3d;
 }
 
 .footer >>> a {
-  font-weight: 600;
+  font-weight: 700;
   color: #3d3d3d;
 }
 
@@ -247,7 +250,7 @@ h6 {
 }
 
 h1 {
-  font-weight: 200;
+  font-weight: 400;
   font-size: 25pt;
   margin-bottom: 0.1in;
 }
@@ -257,7 +260,7 @@ h1 {
 }
 
 #name a {
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 4px;
   color: white;
 }
@@ -384,7 +387,7 @@ section {
 }
 
 .experience > div {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 li,

@@ -1,8 +1,8 @@
 <template>
   <div class="pdf">
     <div class="container">
-      <h1>Redirecting to pdf</h1>If you are not redirected automatically, follow the
-      <a :href="pdfLink">link to the pdf</a>
+      <h1>Redirecting to pdf</h1>If you are not redirected automatically, please follow
+      <a :href="pdfLink">this link to the pdf</a>
     </div>
   </div>
 </template>
@@ -27,11 +27,15 @@ export default {
 
 .container {
   text-align: center;
-  vertical-align: center;
+  background-color: white;
 }
 
 h1 {
   font-size: 12;
   font-weight: 400;
+}
+
+a {
+  color: #4fc08d;
 }
 </style>

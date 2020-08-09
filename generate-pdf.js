@@ -9,6 +9,7 @@ const PDF_OUT = './public/tommy_deng_resume.pdf';
   await page.goto(HTML, { waitUntil: 'networkidle2' });
   await page.pdf({
     path: PDF_OUT,
+    format: 'Letter',
     pageRanges: '1',
     margin: {
       top: 0,
