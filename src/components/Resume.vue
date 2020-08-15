@@ -225,7 +225,7 @@ export default {
 
 .right {
   width: 70%;
-  padding-top: 0.3in;
+  padding-top: 0.33in;
   padding-left: 0.25in;
   padding-right: 0.4in;
 }

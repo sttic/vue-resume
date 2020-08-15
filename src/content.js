@@ -109,7 +109,7 @@ export default {
         title_secondary: "Automation Software Developer",
         date: "Jan - Apr 2019",
         details: [
-          "Increased <b>Jenkins</b> test suite execution speeds by >200% and enabled reliable headless operation by overhauling continuous integration process with Robot Framework",
+          "Increased <b>Jenkins</b> test suite execution speeds by >200% and enabled reliable headless operation by overhauling the continuous integration process with Robot Framework",
           "Allowed testing of previously blocked video control and monitoring features by adding key functionalities to internally developed automation libraries using <b>Java</b>"
         ]
       },

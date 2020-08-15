@@ -26,11 +26,15 @@ npm run lint
 ```
 
 ### Export PDF
+Export the PDF by building the project.
+This will temporarily run the compiled build on an Express server for Puppeteer to export using a headless Chromium instance.
+
 ```
-npm run pdf
+npm run build
 ```
 
-Run while app is active on http://localhost:8080/ to export PDF into the `public/` folder.
+The PDF will be in both the `dist` and `public` folder.
+Make sure port 8000 is available or specify another one with `process.env.PORT`.
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
