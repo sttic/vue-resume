@@ -87,64 +87,13 @@
 
         <div class="column right">
           <!-- WORK EXPERIENCE -->
-          <section id="work" class="experience">
-            <h2>{{ work_experience.title }}</h2>
-            <div v-for="item in work_experience.content" :key="JSON.stringify(item)">
-              <h3>
-                <a
-                  v-if="item.website"
-                  class="experience-header-primary"
-                  :href="item.website"
-                >{{ item.title_primary }}</a>
-                <span v-else class="experience-header-primary">{{ item.title_primary }}</span>
-                <span class="experience-header-secondary">{{ item.title_secondary }}</span>
-                <span class="date-info">{{ item.date }}</span>
-              </h3>
-              <ul>
-                <li v-for="point in item.details" :key="point" v-html="point" />
-              </ul>
-            </div>
-          </section>
+          <ExperienceBlock id="work" :experience="work_experience" />
 
-          <!-- ADDITIONAL EXPERIENCE -->
-          <section id="additional" class="experience">
-            <h2>{{ additional_experience.title }}</h2>
-            <div v-for="item in additional_experience.content" :key="JSON.stringify(item)">
-              <h3>
-                <a
-                  v-if="item.website"
-                  class="experience-header-primary"
-                  :href="item.website"
-                >{{ item.title_primary }}</a>
-                <span v-else class="experience-header-primary">{{ item.title_primary }}</span>
-                <span class="experience-header-secondary">{{ item.title_secondary }}</span>
-                <span class="date-info">{{ item.date }}</span>
-              </h3>
-              <ul>
-                <li v-for="point in item.details" :key="point" v-html="point" />
-              </ul>
-            </div>
-          </section>
+          <!-- LEADERSHIP EXPERIENCE -->
+          <ExperienceBlock id="additional" :experience="additional_experience" />
 
           <!-- PROJECTS -->
-          <section id="projects" class="experience">
-            <h2>{{ projects.title }}</h2>
-            <div v-for="item in projects.content" :key="JSON.stringify(item)">
-              <h3>
-                <a
-                  v-if="item.website"
-                  class="experience-header-primary"
-                  :href="item.website"
-                >{{ item.title_primary }}</a>
-                <span v-else class="experience-header-primary">{{ item.title_primary }}</span>
-                <span class="experience-header-secondary">{{ item.title_secondary }}</span>
-                <span class="date-info">{{ item.date }}</span>
-              </h3>
-              <ul>
-                <li v-for="point in item.details" :key="point" v-html="point" />
-              </ul>
-            </div>
-          </section>
+          <ExperienceBlock id="projects" :experience="projects" />
 
           <div class="footer" v-if="footer_message">
             <div v-html="footer_message" />
@@ -157,9 +106,13 @@
 
 <script>
 import content from "@/content";
+import ExperienceBlock from "@/components/ExperienceBlock.vue";
 
 export default {
   name: "Resume",
+  components: {
+    ExperienceBlock
+  },
   props: {},
   data() {
     return content;
@@ -167,7 +120,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 * {
   padding: 0;
   margin: 0;
@@ -192,7 +145,7 @@ export default {
 }
 
 .left {
-  width: 25%;
+  width: 3in;
   height: 100%;
   background-color: #166fb4;
   padding-top: 0.3in;
@@ -224,7 +177,7 @@ export default {
 }
 
 .right {
-  width: 70%;
+  width: 100%;
   padding-top: 0.33in;
   padding-left: 0.25in;
   padding-right: 0.4in;
@@ -237,7 +190,7 @@ export default {
   color: #3d3d3d;
 }
 
-.footer >>> a {
+.footer a {
   font-weight: 700;
   color: #3d3d3d;
 }
@@ -269,8 +222,23 @@ h2 {
   font-weight: 800;
   font-size: 15pt;
   color: #3d3d3d;
-  margin-bottom: 8px;
   letter-spacing: 0.5pt;
+}
+
+.left h2 {
+  margin-bottom: 8px;
+}
+
+.right h2 {
+  margin-bottom: 6px;
+}
+
+.left section {
+  margin-bottom: 12px;
+}
+
+.right section {
+  margin-bottom: 14px;
 }
 
 h3 {
@@ -285,13 +253,6 @@ h4,
   font-weight: 600;
 }
 
-.experience-header-secondary {
-  color: #3a95b4;
-  font-size: 10pt;
-  letter-spacing: 0.2px;
-  margin-left: 5px;
-}
-
 h5,
 .date-info {
   font-family: "Raleway";
@@ -304,44 +265,32 @@ h6 {
 
 .date-info {
   color: #3a95b4;
-  float: right;
 }
 
-.experience-header-primary {
-  font-family: "Lato";
-  line-height: 12px;
-  letter-spacing: 0.2px;
-  color: #166fb4;
-}
-
-#resume >>> a {
+#resume a {
   transition: 0.5s;
 }
 
-#resume >>> a:hover {
+#resume a:hover {
   color: #4fc08d;
   transition: 0.2s;
 }
 
-p {
+#resume p {
   font-family: "Lato";
   font-weight: 300;
 }
 
-li {
+#resume li {
   font-family: "Lato";
   font-weight: 300;
   list-style-type: none;
   position: relative;
 }
 
-p,
-li {
+#resume p,
+#resume li {
   font-size: 10pt;
-}
-
-.right h3 {
-  margin-bottom: 4px;
 }
 
 .right li {
@@ -359,10 +308,6 @@ li {
 .header a {
   font-weight: inherit;
   color: inherit;
-}
-
-section {
-  margin-bottom: 12px;
 }
 
 #links li {
@@ -384,10 +329,6 @@ section {
 
 #skills > div {
   margin-bottom: 12px;
-}
-
-.experience > div {
-  margin-bottom: 14px;
 }
 
 li,

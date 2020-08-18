@@ -1,5 +1,12 @@
 # vue-resume
 
+A web-based solution to create and view your resume.
+
+## Making changes
+
+All resume content resides within [src/content.js](src/content.js).
+Simply edit the text within it and rebuild to get an updated version.
+
 ## Project setup
 ```
 npm install
@@ -13,11 +20,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files
@@ -34,7 +36,7 @@ npm run build
 ```
 
 The PDF will be in both the `dist` and `public` folder.
-Make sure port 8000 is available or specify another one with `process.env.PORT`.
+Make sure port 8000 is available or specify another one through an environment variable for `process.env.PORT`.
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

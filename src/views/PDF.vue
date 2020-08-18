@@ -22,9 +22,6 @@ export default {
 </script>
 
 <style scoped>
-#pdf {
-}
-
 .container {
   text-align: center;
   background-color: white;

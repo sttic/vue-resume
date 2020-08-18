@@ -169,7 +169,7 @@ export default {
     ]
   },
   projects: {
-    title: "Projects",
+    title: "Personal Projects",
     content: [
       {
         title_primary: "Life's Charge Visualization",

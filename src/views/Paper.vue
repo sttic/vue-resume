@@ -5,7 +5,10 @@
         <p>PDF</p>
       </a>
     </div>
-    <Resume class="page" :style="`transform: translate(-50%, -50%) scale(${scale}); height: ${letterInch.height}in;`" />
+    <Resume
+      class="page"
+      :style="`transform: translate(-50%, -50%) scale(${scale}); height: ${letterInch.height}in;`"
+    />
   </div>
 </template>
 
@@ -65,9 +68,6 @@ export default {
 </script>
 
 <style scoped>
-#paper {
-}
-
 .page {
   width: 8.5in;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 32px 0 rgba(0, 0, 0, 0.5);
@@ -87,7 +87,7 @@ export default {
 
 .pdf a {
   background-color: white;
-  border: 2px black solid;
+  border: 2px solid black;
   margin: auto;
   border-radius: 200px;
   color: black;
