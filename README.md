@@ -7,6 +7,8 @@ A web-based solution to create and view your resume.
 All resume content resides within [src/content.js](src/content.js).
 Simply edit the text within it and rebuild to get an updated version.
 
+Previewing edits in a Chromium-based browser is recommended as it will be most accurate to the exported PDF.
+
 ## Project setup
 ```
 npm install
