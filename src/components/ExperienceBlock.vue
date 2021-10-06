@@ -9,6 +9,8 @@
               v-if="item.website"
               class="experience-header-primary"
               :href="item.website"
+              target="_blank"
+              rel="noopener noreferrer"
             >{{ item.title_primary }}</a>
             <div v-else class="experience-header-primary">{{ item.title_primary }}</div>
           </h3>

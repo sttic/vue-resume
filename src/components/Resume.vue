@@ -4,14 +4,16 @@
       <div class="row">
         <div class="column left">
           <h1 id="name">
-            <a :href="website">{{ first_name }} {{ last_name }}</a>
+            <a :href="website" target="_blank" rel="noopener noreferrer"
+              >{{ first_name }} {{ last_name }}</a
+            >
           </h1>
 
           <!-- LINKS -->
           <section id="links">
             <ul>
               <li v-for="item in links" :key="JSON.stringify(item)">
-                <a :href="item.href">
+                <a :href="item.href" target="_blank" rel="noopener noreferrer">
                   <font-awesome-icon class="icon" :icon="item.icon" />
                   <span class="display-link">{{ item.display }}</span>
                 </a>
@@ -40,19 +42,29 @@
           <!-- SKILLS -->
           <section id="skills">
             <h2>{{ skills.title }}</h2>
-            <div v-for="skillSet in skills.content" :key="JSON.stringify(skillSet)">
+            <div
+              v-for="skillSet in skills.content"
+              :key="JSON.stringify(skillSet)"
+            >
               <h5>{{ skillSet.category }}</h5>
-              <div v-for="(group, i) in skillSet.groups" :key="JSON.stringify(group)">
+              <div
+                v-for="(group, i) in skillSet.groups"
+                :key="JSON.stringify(group)"
+              >
                 <div v-for="(skill, j) in group" :key="skill">
                   <p v-if="j % 2 === 0" class="left-skills">
                     {{ group[j] }}
                     <span
                       v-if="j + 1 < group.length"
                       class="right-skills"
-                    >{{ group[j + 1] }}</span>
+                      v-html="group[j + 1]"
+                    />
                   </p>
                 </div>
-                <div v-if="i !== skillSet.groups.length - 1" class="bullet-list-break" />
+                <div
+                  v-if="i !== skillSet.groups.length - 1"
+                  class="bullet-list-break"
+                />
               </div>
             </div>
           </section>
@@ -61,7 +73,10 @@
           <section id="hackathons">
             <h2>{{ hackathons.title }}</h2>
             <ul>
-              <li v-for="item in hackathons.content" :key="JSON.stringify(item)">
+              <li
+                v-for="item in hackathons.content"
+                :key="JSON.stringify(item)"
+              >
                 {{ item.date }}
                 <span>{{ item.name }}</span>
               </li>
@@ -90,7 +105,10 @@
           <ExperienceBlock id="work" :experience="work_experience" />
 
           <!-- LEADERSHIP EXPERIENCE -->
-          <ExperienceBlock id="additional" :experience="additional_experience" />
+          <ExperienceBlock
+            id="additional"
+            :experience="additional_experience"
+          />
 
           <!-- PROJECTS -->
           <ExperienceBlock id="projects" :experience="projects" />
@@ -129,6 +147,10 @@ export default {
 #resume {
   background: white;
   display: flex;
+}
+
+b {
+  font-weight: bold;
 }
 
 .container {
@@ -214,7 +236,7 @@ h1 {
 
 #name a {
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   color: white;
 }
 
